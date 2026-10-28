@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Atelier Veda creates thoughtful homes and interiors shaped by light, material and the way you live.">
+<meta name="theme-color" content="#17221c">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script><title>Atelier Veda – Architecture & Interior Design</title>
+<link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,wght@0,400;0,600;1,400&family=Manrope:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#E8E7E1;--ink:#16211C;--mid:#2C3A33;--acc:#C8963E;--mut:#5d6b63;--line:rgba(22,33,28,.16);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px);color-scheme:light}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#E8E7E1;--ink:#16211C}}
+html{scroll-behavior:smooth;scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--ink);font:300 17px/1.7 Manrope,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:'Bodoni Moda',Georgia,serif;font-weight:400;line-height:1.08;letter-spacing:-.01em}
+h1{font-size:clamp(2.6rem,7vw,6rem)}h2{font-size:clamp(2rem,4.5vw,3.6rem)}h3{font-size:1.6rem}
+a{color:inherit;text-decoration:none}a:focus-visible,button:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid var(--acc);outline-offset:3px}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:20px 5vw;mix-blend-mode:normal;transition:background .4s,color .4s}
+nav.solid{background:rgba(232,231,225,.92);backdrop-filter:blur(10px);color:var(--ink)}
+nav.dark{color:#E8E7E1}
+.logo{font-family:'Bodoni Moda',serif;font-size:1.5rem}
+nav ul{display:flex;gap:2rem;list-style:none;padding:0}
+nav ul a{position:relative;font-size:.95rem;padding:4px 0}
+nav ul a::after{content:"";position:absolute;left:0;bottom:0;height:1px;width:100%;background:var(--acc);transform:scaleX(0);transform-origin:left;transition:transform .4s}
+nav ul a:hover::after,nav ul a.on::after{transform:scaleX(1)}
+#burger{display:none;background:none;border:0;color:inherit;font:inherit;cursor:pointer}
+.page{display:none;min-height:100vh}.page.on{display:block;animation:pg .8s cubic-bezier(.2,.7,.2,1)}
+@keyframes pg{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+section{padding:12vh 5vw}
+.wrap{max-width:1200px;margin:auto}
+.btn{display:inline-block;border:1px solid currentColor;padding:14px 32px;border-radius:99px;background:none;color:inherit;font:600 .9rem Manrope;cursor:pointer;transition:background .4s,color .4s,transform .4s}
+.btn:hover{background:var(--acc);border-color:var(--acc);color:var(--ink);transform:translateY(-2px)}
+/* HERO zoom-through */
+#zoom{height:420vh;position:relative;background:var(--ink)}
+.stick{position:sticky;top:0;height:100vh;overflow:hidden}
+.stick svg{position:absolute;inset:0;width:100%;height:100%}
+#sceneA{transform-origin:50% 66%;will-change:transform,opacity}
+#sceneB,#sceneC{opacity:0;will-change:transform,opacity}
+.herotxt{position:absolute;left:5vw;right:5vw;bottom:12vh;color:#E8E7E1;z-index:3;transition:opacity .2s}
+.herotxt p{max-width:46ch;margin:1.2rem 0 0;color:#cfd2c8}
+.cap{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:3;color:#E8E7E1;text-align:center;opacity:0;pointer-events:none}
+.hint{position:absolute;right:5vw;bottom:5vh;color:#E8E7E1;font-size:.8rem;z-index:3;display:flex;gap:10px;align-items:center}
+.hint i{width:1px;height:46px;background:var(--acc);display:block;animation:dr 2s infinite}
+@keyframes dr{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
+/* sections */
+.intro{display:grid;grid-template-columns:1fr 1fr;gap:6vw;align-items:end}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:2rem;border-top:1px solid var(--line);margin-top:8vh;padding-top:4vh}
+.stats b{display:block;font:400 3rem 'Bodoni Moda',serif;color:var(--ink)}
+.dark-s{background:var(--ink);color:#E8E7E1}
+.dark-s .sub{color:#aeb5ad}
+.pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:rgba(232,231,225,.2);margin-top:6vh;border:1px solid rgba(232,231,225,.2)}
+.pillars div{background:var(--ink);padding:3rem 2rem;transition:background .5s}
+.pillars div:hover{background:var(--mid)}
+.pillars h3{color:var(--acc);margin-bottom:.8rem}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:2rem;margin-top:6vh}
+.card{grid-column:span 6;perspective:900px}
+.card:nth-child(3n+1){grid-column:span 7}.card:nth-child(3n+2){grid-column:span 5}.card:nth-child(3n){grid-column:span 12}
+.card .in{transform-style:preserve-3d;transition:transform .25s ease-out}
+.art{height:340px;position:relative;overflow:hidden;display:block}
+.card:nth-child(3n) .art{height:440px}
+.art svg{width:100%;height:100%;display:block;transition:transform 1.2s cubic-bezier(.2,.7,.2,1)}
+.card:hover .art svg{transform:scale(1.08)}
+.card h3{margin-top:1rem}.card small{color:var(--mut)}
+.rev{opacity:0;transform:translateY(40px);transition:opacity 1s,transform 1s cubic-bezier(.2,.7,.2,1)}.rev.in{opacity:1;transform:none}
+.marq{overflow:hidden;white-space:nowrap;border-block:1px solid var(--line);padding:2rem 0}
+.marq div{display:inline-block;animation:mq 28s linear infinite;font:italic 2.6rem 'Bodoni Moda',serif}
+.marq span{margin:0 2rem;color:var(--acc)}
+@keyframes mq{to{transform:translateX(-50%)}}
+.proc{display:flex;gap:2rem;overflow-x:auto;padding-bottom:1rem;margin-top:5vh;scroll-snap-type:x mandatory}
+.proc div{flex:0 0 min(340px,80vw);border-top:2px solid var(--acc);padding-top:1.2rem;scroll-snap-align:start}
+.proc b{font:400 1.6rem 'Bodoni Moda',serif;display:block;margin-bottom:.4rem}
+.ph{padding:22vh 5vw 8vh;background:var(--ink);color:#E8E7E1}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:6vw}
+form{display:grid;gap:1.2rem}
+input,textarea,select{width:100%;background:none;border:0;border-bottom:1px solid var(--ink);padding:12px 0;font:inherit;color:inherit}
+label{font-size:.85rem;color:var(--mut)}
+.ok{display:none;color:var(--ink);border-left:3px solid var(--acc);padding-left:1rem}
+footer{background:var(--ink);color:#aeb5ad;padding:10vh 5vw 5vh}
+footer h2{color:#E8E7E1;margin-bottom:2rem}
+footer .row{display:flex;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(232,231,225,.2);padding-top:2rem;margin-top:6vh;font-size:.85rem}
+.e404{min-height:100vh;display:grid;place-items:center;text-align:center;background:var(--ink);color:#E8E7E1;padding:5vw}
+.e404 h1{font-size:clamp(6rem,22vw,16rem);color:transparent;-webkit-text-stroke:1px var(--acc)}
+@media(max-width:800px){nav ul{display:none;position:absolute;top:100%;left:0;right:0;flex-direction:column;background:var(--ink);color:#E8E7E1;padding:1.5rem 5vw;gap:1rem}nav ul.open{display:flex}#burger{display:block}
+.intro,.two,.pillars,.team{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}.card,.card:nth-child(n){grid-column:span 12}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rev{opacity:1;transform:none}html{scroll-behavior:auto}}
+.layer{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform,opacity}
+#sceneB,#sceneC{opacity:0}.shade{position:absolute;inset:0;z-index:2;background:linear-gradient(180deg,rgba(22,33,28,.45),rgba(22,33,28,.1) 40%,rgba(22,33,28,.75));pointer-events:none}
+.art img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 1.4s cubic-bezier(.2,.7,.2,1)}.card:hover .art img{transform:scale(1.08)}
+.band{height:90vh;overflow:hidden;position:relative;background:var(--mid)}.band.s{height:70vh}
+.band img{position:absolute;left:0;top:-12%;width:100%;height:124%;object-fit:cover}
+.band::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(22,33,28,.7),transparent 55%)}
+.band h2{position:absolute;left:5vw;bottom:8vh;z-index:2;color:#E8E7E1;max-width:16ch}
+.credit{font-size:.75rem;opacity:.7}
+.band video{position:absolute;left:0;top:-12%;width:100%;height:124%;object-fit:cover}
+#curtain{position:fixed;inset:0;background:var(--ink);z-index:90;transform:scaleY(0);transform-origin:bottom;pointer-events:none;display:grid;place-items:center;color:var(--acc);font:italic 2.4rem 'Bodoni Moda',serif}
+.art,.band,.gal div,.stick{background:linear-gradient(135deg,#2C3A33,#16211C 62%,rgba(200,150,62,.35))}
+.art{aspect-ratio:auto}
+.gal{display:grid;grid-template-columns:repeat(12,1fr);gap:1.5rem;margin:6vh 0}
+.gal div{position:relative;overflow:hidden;height:46vh;grid-column:span 6}.gal div:nth-child(1){grid-column:span 7}.gal div:nth-child(2){grid-column:span 5}.gal div:nth-child(3){grid-column:span 12;height:70vh}
+.gal img{position:absolute;left:0;top:-10%;width:100%;height:120%;object-fit:cover}
+.facts{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;border-block:1px solid var(--line);padding:2rem 0;margin:6vh 0}
+.facts dt{font-size:.8rem;color:var(--mut)}.facts dd{margin:0;font:400 1.3rem 'Bodoni Moda',serif}
+.story{display:grid;grid-template-columns:1fr 1.4fr;gap:6vw}
+.band h1{position:absolute;left:5vw;bottom:8vh;z-index:2;color:#E8E7E1;max-width:14ch}
+.quote{font:italic 400 clamp(1.6rem,3.4vw,2.8rem)/1.25 'Bodoni Moda',serif;max-width:26ch}
+.stars{color:var(--acc);letter-spacing:4px}
+.tgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;margin-top:5vh}
+.tcard{border:1px solid rgba(232,231,225,.22);padding:2rem;transition:background .5s,transform .5s}
+.tcard:hover{background:var(--mid);transform:translateY(-6px)}
+.tcard p{margin:1rem 0;color:#dfe2da}.tcard small{color:#aeb5ad}
+.note{font-size:.75rem;opacity:.65;margin-top:2rem}
+.nextp{display:block;padding:12vh 5vw;background:var(--ink);color:#E8E7E1;transition:background .5s}.nextp:hover{background:var(--mid)}
+@media(max-width:800px){.facts{grid-template-columns:1fr 1fr}.story,.tgrid{grid-template-columns:1fr}.gal div,.gal div:nth-child(n){grid-column:span 12}}
+
+/* Atelier Veda editorial art direction */
+:root{--bg:#f1efe9;--ink:#17221c;--mid:#29382f;--acc:#bd8b4b;--mut:#68746b;--line:rgba(23,34,28,.17);--paper:#f8f7f2}
+body{font-size:16px;line-height:1.75;letter-spacing:.005em}
+::selection{background:var(--acc);color:var(--ink)}
+.skip{position:fixed;z-index:120;top:10px;left:10px;padding:10px 16px;background:var(--paper);transform:translateY(-150%)}.skip:focus{transform:none}
+#scroll-progress{position:fixed;z-index:100;left:0;top:0;height:2px;width:100%;background:var(--acc);transform:scaleX(var(--progress,0));transform-origin:left}
+nav{padding:18px 5vw;transition:background .45s,color .45s,box-shadow .45s}
+nav.solid{background:rgba(241,239,233,.9);box-shadow:0 1px 0 var(--line);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.logo{font-size:1.65rem;letter-spacing:.015em}
+nav ul{gap:clamp(1.25rem,2.8vw,2.7rem)}nav ul a{font-size:.78rem;letter-spacing:.12em;text-transform:uppercase}
+nav ul li:last-child a{padding:10px 18px;border:1px solid currentColor;border-radius:99px;transition:background .3s,color .3s}nav ul li:last-child a:hover{background:var(--acc);color:var(--ink)}nav ul li:last-child a::after{display:none}
+#burger{font-size:.78rem;letter-spacing:.1em;text-transform:uppercase}#burger span{padding-left:5px;color:var(--acc)}
+section{padding:clamp(5rem,11vw,10rem) 5vw}.wrap{max-width:1320px}
+#zoom{height:500vh;background:#101711}.stick{background:#101711;perspective:1500px;transform-style:preserve-3d}.layer{filter:saturate(.82)}
+.shade{background:linear-gradient(90deg,rgba(15,22,17,.57),rgba(15,22,17,.12) 65%),linear-gradient(0deg,rgba(15,22,17,.58),transparent 48%,rgba(15,22,17,.12))}
+.herotxt{left:8vw;bottom:15vh;max-width:850px}.herotxt h1{font-size:clamp(3.8rem,9vw,8.2rem);letter-spacing:-.045em}.herotxt p{margin-top:1.5rem;max-width:42ch;font-size:1.02rem;color:rgba(248,247,242,.83)}
+.hint{right:6vw;bottom:7vh;text-transform:uppercase;letter-spacing:.15em;font-size:.68rem}.cap h2{max-width:13ch;font-size:clamp(2.2rem,6vw,5.2rem);text-shadow:0 4px 36px #101711}
+h1,h2,h3{letter-spacing:-.025em}h2{font-size:clamp(2.5rem,5vw,4.5rem)}
+.intro{gap:9vw}.intro h2{max-width:12ch}.intro>div{max-width:53ch}
+.btn{padding:13px 23px;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase}.btn::after{content:'↗';margin-left:1.1rem;color:var(--acc);transition:transform .3s}.btn:hover::after{transform:translate(3px,-3px)}
+.stats{margin-top:7vh;padding-top:3vh}.stats b{font-size:clamp(2.2rem,4vw,3.6rem)}
+.marq{padding:1.7rem 0;background:#e8e5dc;border-color:transparent}.marq div{font-size:clamp(1.7rem,3.2vw,2.5rem);letter-spacing:.02em}.marq span{font-size:.8rem}
+.band{height:min(88vh,980px);background:#27372e}.band.s{height:min(70vh,760px)}.band img,.band video{filter:brightness(.83) saturate(.8)}.band h2{left:8vw;bottom:9vh;max-width:12ch;font-size:clamp(2.8rem,6vw,5.7rem)}
+.dark-s{background:#17221c}.pillars{margin-top:7vh}.pillars div{padding:clamp(2rem,4vw,4rem)}.pillars h3{font-size:1.8rem}.pillars p{max-width:34ch}
+.grid{gap:clamp(1rem,2.3vw,2.2rem);margin-top:7vh}.grid[data-feat="1"]{perspective:1600px;perspective-origin:50% 35%;transform-style:preserve-3d}.grid[data-feat="1"] .card{transform-style:preserve-3d;backface-visibility:hidden;will-change:transform,opacity}.grid[data-feat="1"] .card .art{transform:translateZ(36px);backface-visibility:hidden}.card{perspective:1200px}.card .in{transition:transform .55s cubic-bezier(.2,.7,.2,1),filter .55s;will-change:transform}.art{height:auto;aspect-ratio:4/3;background:#d5d1c6}.card:nth-child(3n) .art{height:auto;aspect-ratio:2/1}.art img{filter:saturate(.84);transition:transform 1.2s cubic-bezier(.2,.7,.2,1),filter .7s}.card:hover .art img{filter:saturate(1)}.card h3{font-size:clamp(1.5rem,2.2vw,2rem);margin-top:1.3rem}.card small{font-size:.75rem;letter-spacing:.08em;text-transform:uppercase}
+.proc{gap:1rem;scrollbar-color:var(--acc) transparent}.proc div{flex-basis:min(320px,78vw);padding:1.5rem 1.5rem 1.5rem 0;line-height:1.65}.proc b{font-size:1.8rem}
+.ph{padding:25vh 8vw 10vh;background:linear-gradient(110deg,#17221c,#26372d);position:relative;overflow:hidden}.ph::after{content:'V';position:absolute;right:5vw;bottom:-.45em;font:400 36vw/.8 'Bodoni Moda',serif;color:rgba(248,247,242,.035);pointer-events:none}.ph h1{position:relative;z-index:1;font-size:clamp(4rem,10vw,9rem);letter-spacing:-.05em}.ph p{position:relative;z-index:1}
+
+.facts{gap:1rem}.facts dt{letter-spacing:.1em;text-transform:uppercase}.facts dd{font-size:1.2rem}.story{align-items:start}.gal{gap:1rem}.gal div{background:#d5d1c6}.gal img{filter:saturate(.82);transition:transform 1.2s}.gal div:hover img{transform:scale(1.035)}
+.tcard{padding:clamp(1.5rem,3vw,2.5rem)}.tcard p{line-height:1.8}.stars{font-size:.85rem}
+form{gap:1.8rem}.form-note{font-size:.78rem;color:var(--mut)}.form-note a{text-decoration:underline;text-underline-offset:3px}input,textarea,select{padding:14px 0;border-color:rgba(23,34,28,.3)}input:focus,textarea:focus,select:focus{border-color:var(--acc)}.ok{margin:0;padding:.8rem 0 .8rem 1rem;font-size:.9rem}
+footer{padding:clamp(5rem,10vw,9rem) 5vw 3rem}footer h2{max-width:14ch;font-size:clamp(2.8rem,6vw,5.5rem)}footer .row{letter-spacing:.03em}
+#curtain{background:#17221c;color:#d2a46a;letter-spacing:.04em}
+@media(max-width:800px){nav{padding:14px 5vw}nav ul{top:calc(100% + 1px);background:rgba(23,34,28,.97);padding:1.6rem 5vw 2rem;box-shadow:0 18px 28px rgba(0,0,0,.12)}nav ul a{font-size:.82rem}.herotxt{left:7vw;right:7vw;bottom:17vh}.herotxt h1{font-size:clamp(3.3rem,13vw,6rem)}.hint{right:7vw;bottom:5vh}.stats{gap:1.5rem}.facts{gap:1.2rem}.team{gap:2rem}.team>div{max-width:440px}.ph{padding:25vh 7vw 9vh}}
+@media(max-width:520px){body{font-size:15px}.logo{font-size:1.45rem}#zoom{height:380vh}.cap{left:7vw;right:7vw;transform:translateY(-50%);text-align:left}.cap h2{font-size:2.7rem}.stats{font-size:.78rem}.stats b{font-size:2rem}.band{height:72vh}.band.s{height:54vh}.band h2{left:7vw;bottom:7vh}.card:nth-child(3n) .art{aspect-ratio:4/3}.facts{grid-template-columns:1fr 1fr}.facts>div:last-child{grid-column:span 2}}
+@media(hover:none){.card .in{transform:none!important}}
+@media(prefers-reduced-motion:reduce){#scroll-progress{display:none}.band,.art img,.card .in{will-change:auto}}
+
+
+
+.site-footer{background:#111a15;color:#e9e8e0;padding:clamp(4rem,8vw,7rem) 5vw 1.5rem}.footer-main{max-width:1320px;margin:0 auto 4.5rem;display:grid;grid-template-columns:1.6fr repeat(3,1fr);gap:4vw}.footer-brand .logo{display:inline-block;font-size:1.8rem}.footer-brand p{max-width:32ch;color:#b4bcb4;margin:1.4rem 0 2rem}.footer-cta{font-size:.85rem;text-transform:uppercase;letter-spacing:.08em;border-bottom:1px solid rgba(233,232,224,.38);padding-bottom:.7rem}.footer-cta span{color:var(--acc);margin-left:1.2rem}.footer-col{display:flex;flex-direction:column;align-items:flex-start;gap:.75rem;font-size:.86rem}.footer-col h3{font:600 .72rem Manrope,sans-serif;color:#bd8b4b;letter-spacing:.14em;text-transform:uppercase;margin-bottom:.65rem}.footer-col p{color:#b4bcb4;line-height:1.8}.footer-col a{color:#e9e8e0;transition:color .25s}.footer-col a:hover,.footer-bottom a:hover{color:#d4a66a}.footer-bottom{max-width:1320px;margin:auto;border-top:1px solid rgba(233,232,224,.18);padding-top:1.2rem;display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.72rem;color:#aeb5ad}.footer-bottom .credit{margin:0}.footer-bottom a{text-decoration:underline;text-underline-offset:3px}.service-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:1rem}.service-card{background:var(--bg);padding:clamp(2rem,5vw,4.5rem);min-height:320px}.service-card>span{color:var(--acc);font-size:.76rem;letter-spacing:.15em}.service-card h2{font-size:clamp(2rem,3.5vw,3.2rem);margin:2.5rem 0 1rem}.service-card p{max-width:48ch}.service-card small{display:block;margin-top:1.7rem;color:var(--mut);text-transform:uppercase;letter-spacing:.08em;font-size:.68rem}.service-cta{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:5rem 0 0}.service-cta h2{font-size:clamp(2rem,4vw,3.5rem)}.faq-list{max-width:900px}.faq-list details{border-bottom:1px solid var(--line);padding:1.5rem 0}.faq-list summary{cursor:pointer;list-style:none;font:400 clamp(1.35rem,2.4vw,1.8rem)/1.3 'Bodoni Moda',Georgia,serif;padding-right:2.5rem;position:relative}.faq-list summary::-webkit-details-marker{display:none}.faq-list summary::after{content:'+';position:absolute;right:.35rem;top:0;font:300 1.4rem Manrope;color:var(--acc)}.faq-list details[open] summary::after{content:'−'}.faq-list details p{max-width:65ch;margin:1.1rem 2rem 0 0;color:var(--mut)}.legal{max-width:900px}.legal>p{margin-bottom:1.4rem}.legal article{padding:2rem 0;border-top:1px solid var(--line)}.legal article h2{font-size:clamp(1.65rem,3vw,2.3rem);margin-bottom:.8rem}.legal article p+p{margin-top:1rem}.policy-note{background:#e7e3d8;border-left:3px solid var(--acc);padding:1.2rem 1.4rem}.policy-note b{font-weight:600}.page[id="p-privacy"] .ph,.page[id="p-terms"] .ph,.page[id="p-cookies"] .ph,.page[id="p-accessibility"] .ph{padding-top:22vh;padding-bottom:8vh}
+@media(max-width:800px){.footer-main{grid-template-columns:1fr 1fr;gap:3rem 2rem}.footer-brand{grid-column:1/-1}.service-card{min-height:280px;padding:2rem}.service-cta{align-items:flex-start;flex-direction:column;padding-top:3.5rem}}
+@media(max-width:520px){.footer-main{grid-template-columns:1fr 1fr;gap:2.5rem 1rem}.footer-col{font-size:.8rem}.footer-bottom{flex-direction:column}.service-list{grid-template-columns:1fr}.service-card{min-height:auto}.service-card h2{margin:1.6rem 0 .8rem}.policy-note{padding:1rem}.legal article{padding:1.5rem 0}}
+
+
+h1,h2,h3{ text-wrap:balance }
+p{ text-wrap:pretty }
+.intro h2{max-width:17ch;color:var(--ink);font-size:clamp(2.25rem,3.7vw,3.45rem);line-height:1.02}
+.intro>div{max-width:55ch}
+.intro>div p{max-width:54ch}
+.muted-note{display:inline-block;margin-top:.45rem;color:var(--mut);font-size:.85rem}
+.case-disclaimer{font-size:.82rem;letter-spacing:.025em;color:#d5d9d0;opacity:.85}
+.ph .case-disclaimer{margin-top:1rem}
+.project-cover .case-label{position:absolute;z-index:3;left:8vw;bottom:24vh;color:#e8e7e1;background:rgba(23,34,28,.56);border:1px solid rgba(232,231,225,.45);border-radius:99px;padding:.55rem 1rem;font-size:.65rem;letter-spacing:.13em;text-transform:uppercase;backdrop-filter:blur(8px)}
+.project-outcome{padding:5rem 0;text-align:center;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.project-outcome small{color:var(--acc);font-size:.7rem;letter-spacing:.16em}
+.project-outcome .quote{max-width:34ch}
+.studio-disciplines{display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:5vh}
+.studio-disciplines article{border-top:1px solid var(--line);padding-top:1.2rem}
+.studio-disciplines span{font-size:.68rem;color:var(--acc);letter-spacing:.12em;text-transform:uppercase}
+.studio-disciplines h3{margin:.8rem 0;font-size:1.7rem}
+.studio-disciplines p{color:var(--mut);font-size:.9rem}
+@media(max-width:800px){.intro h2{max-width:17ch;font-size:clamp(2.35rem,7vw,3.15rem)}.studio-disciplines{grid-template-columns:1fr;gap:1.4rem}.project-cover .case-label{left:7vw;bottom:21vh}}
+@media(max-width:520px){.intro h2{max-width:17ch;font-size:clamp(2.15rem,9vw,2.65rem)}.project-cover .case-label{bottom:18vh}}
+
+</style></head><body>
+<a class="skip" href="#main-content">Skip to content</a><div id="scroll-progress" aria-hidden="true"></div>
+<nav id="nav" aria-label="Main navigation"><a class="logo" href="#home">Atelier Veda</a><button id="burger" aria-label="Open navigation" aria-expanded="false" aria-controls="menu">Menu <span aria-hidden="true">+</span></button>
+<ul id="menu"><li><a href="#home">Home</a></li><li><a href="#about">Studio</a></li><li><a href="#services">Services</a></li><li><a href="#projects">Projects</a></li><li><a href="#contact">Contact</a></li></ul></nav>
+
+<main id="main-content">
+<div class="page" id="p-home">
+ <div id="zoom"><div class="stick">
+  <img class="layer" id="sceneC" src="https://images.unsplash.com/photo-1757894651531-c318fe4072b2?auto=format&fit=crop&w=1800&q=85" alt="Brick courtyard beneath a glass roof">
+  <img class="layer" id="sceneB" src="https://images.unsplash.com/photo-1761367950537-14f834333ecc?auto=format&fit=crop&w=1800&q=85" alt="Rammed-earth passage with timber pergola and natural light">
+  <img class="layer" id="sceneA" src="https://images.unsplash.com/photo-1776362355123-ca966d36e29c?auto=format&fit=crop&w=1800&q=85" alt="Penthouse living room with city windows and sculptural lighting">
+  <div class="shade"></div>
+  <div class="cap" id="c1"><h2>Step inside</h2></div><div class="cap" id="c2"><h2>Every room, a composed moment</h2></div>
+  <div class="herotxt" id="ht"><h1>Spaces shaped<br>by light.</h1><p>Atelier Veda designs homes, studios and hospitality interiors where proportion, material and daylight lead.</p></div>
+  <div class="hint"><span>Scroll to enter the house</span><i></i></div>
+ </div></div>
+ <section><div class="wrap"><div class="intro rev"><h2>Architecture<br>that feels like<br>a quiet conversation.</h2><div><p>We start by listening to how you live. Then we shape the plan around your routines, the site and the light. Honest materials and thoughtful details make each space feel calm and personal.</p><p style="margin-top:1.5rem"><a class="btn" href="#about">Meet the studio</a></p></div></div>
+ <div class="stats rev"><div><b>01</b>Listen to the brief</div><div><b>02</b>Read the site and light</div><div><b>03</b>Choose lasting materials</div><div><b>04</b>Resolve the details</div></div></div></section>
+ <div class="marq"><div id="mq"></div></div>
+ <div class="band" id="band"><video data-px muted loop playsinline preload="metadata" poster="https://assets.mixkit.co/videos/4196/4196-thumb-360-0.jpg" aria-label="Slow panning view of a minimalist luxury hotel room"><source src="https://assets.mixkit.co/videos/4196/4196-720.mp4" type="video/mp4"></video><h2>Hospitality, shaped around a slower arrival.</h2></div>
+ <section class="dark-s"><div class="wrap"><h2 class="rev">Three principles behind every plan</h2>
+  <div class="pillars rev"><div><h3>Proportion</h3><p class="sub">Human scale, proportion and movement guide ceiling heights, window sizes and the rhythm of each room.</p></div><div><h3>Light</h3><p class="sub">We study the sun path first, so morning, noon and dusk each have a place in the house.</p></div><div><h3>Material</h3><p class="sub">Stone, timber, lime plaster and brass chosen to age well and feel good under the hand.</p></div></div></div></section>
+ <section><div class="wrap"><h2 class="rev">Selected work</h2><div class="grid" data-feat="1"></div><p style="margin-top:6vh"><a class="btn" href="#projects">All projects</a></p></div></section>
+ <section style="background:#dcdad2"><div class="wrap"><h2 class="rev">How we work</h2><div class="proc rev"><div><b>Listen</b>Site visit, brief and a walk through how you live.</div><div><b>Sketch</b>Concept plans, moodboards and a 3D walkthrough.</div><div><b>Detail</b>Drawings, material selections and a clear cost plan.</div><div><b>Build</b>Construction support and site visits, scoped to the project.</div></div></div></section>
+
+ <div class="band"><video data-px muted loop playsinline preload="metadata" poster="https://assets.mixkit.co/videos/4198/4198-thumb-360-0.jpg" aria-label="Slow pan across a minimalist hotel room with wooden furniture"><source src="https://assets.mixkit.co/videos/4198/4198-720.mp4" type="video/mp4"></video><h2>Warm materials. Quiet light.</h2></div>
+ <section class="dark-s"><div class="wrap"><h2 class="rev">Thoughtful at every scale</h2><div class="tgrid rev"><div class="tcard"><h3>Clear decisions</h3><p>We make the brief, priorities and design choices easy to discuss before they become drawings.</p></div><div class="tcard"><h3>Material with meaning</h3><p>We consider how surfaces look, feel and age in the climate and rhythms of everyday use.</p></div><div class="tcard"><h3>Details that belong</h3><p>Lighting, storage and joinery are resolved as part of the architecture, not left until the end.</p></div></div></div></section>
+</div>
+
+<div class="page" id="p-about"><div class="ph"><h1>The studio</h1><p style="max-width:52ch;margin-top:1rem;color:#cfd2c8">Architecture, interiors and landscape considered together, with light, material and daily life at the centre.</p></div>
+ <div class="band s"><img data-px src="https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1800&q=85" alt="Daylit collaborative architecture studio" loading="lazy"><h2>Detail is where a building becomes a home.</h2></div>
+ <section><div class="wrap two rev"><h2>Design is a way of paying attention.</h2><div><p>This studio concept is guided by a simple idea: a building should respond to its climate, its street and the people inside it. Careful planning and tactile materials can make rooms feel calm on day one and richer over time.</p><p style="margin-top:1rem">Across homes, workspaces and hospitality settings, the design approach stays attentive to light, circulation and detail.</p></div></div>
+ <div class="wrap rev"><div class="studio-disciplines"><article><span>01 / Plan</span><h3>Architecture</h3><p>Site, climate, circulation and proportion.</p></article><article><span>02 / Shape</span><h3>Interiors</h3><p>Rooms, materials, joinery and light.</p></article><article><span>03 / Extend</span><h3>Landscape</h3><p>Courtyards, planting and the threshold between inside and out.</p></article></div></div></section></div>
+
+<div class="page" id="p-projects"><div class="ph"><h1>Projects</h1><p style="margin-top:1rem;color:#cfd2c8">Select a project to view it in detail.</p><p class="case-disclaimer">Concept case studies with illustrative project details and stock imagery.</p></div>
+ <section><div class="wrap"><div class="grid" data-feat="0"></div></div></section></div>
+
+<div class="page" id="p-contact"><div class="ph"><h1>Let’s talk about your space</h1></div>
+ <section><div class="wrap two"><div class="rev"><h2>Start a project</h2><p style="margin:1rem 0">Share the site, project type and timing. This form is a visual preview and is not connected to a studio inbox.</p><p class="muted-note">A verified enquiry channel will be added when the studio’s launch details are confirmed.</p></div>
+ <form id="f" class="rev"><div><label for="n">Your name</label><input id="n" required></div><div><label for="e">Email</label><input id="e" type="email" required></div><div><label for="t">Project type</label><select id="t"><option>Residence</option><option>Apartment interior</option><option>Office or retail</option><option>Hospitality</option></select></div><div><label for="m">About the project</label><textarea id="m" rows="3"></textarea></div><button class="btn" type="submit">Preview enquiry form</button><p class="form-note">Demo only: this form does not send or store your details. Read the <a href="#privacy">Privacy Policy</a>.</p><p class="ok" id="ok">Demo preview complete. No enquiry was sent or saved.</p></form></div></section></div>
+
+
+<div class="page" id="p-services"><div class="ph"><h1>What we do</h1><p style="max-width:52ch;margin-top:1rem;color:#cfd2c8">A considered design process, from first conversation to the final details.</p></div>
+ <section><div class="wrap"><div class="service-list">
+  <article class="service-card rev"><span>01</span><h2>Architecture</h2><p>Site planning, concept design and architectural coordination shaped around climate, context and the way people use a space.</p><small>New homes · Extensions · Feasibility</small></article>
+  <article class="service-card rev"><span>02</span><h2>Interior design</h2><p>Room planning, material palettes, lighting and bespoke details that make interiors feel coherent and practical.</p><small>Homes · Apartments · Hospitality</small></article>
+  <article class="service-card rev"><span>03</span><h2>Workplaces</h2><p>Work settings that balance daylight, acoustics, shared spaces and the needs of the people who use them every day.</p><small>Studios · Offices · Retail</small></article>
+  <article class="service-card rev"><span>04</span><h2>Landscape & lighting</h2><p>Outdoor rooms, planting and layered lighting that extend the architecture into the evening and across the seasons.</p><small>Courtyards · Gardens · Lighting plans</small></article>
+ </div><div class="service-cta rev"><h2>Have a project in mind?</h2><a class="btn" href="#contact">Start a conversation</a></div></div></section></div>
+
+<div class="page" id="p-faq"><div class="ph"><h1>Questions, answered</h1><p style="max-width:52ch;margin-top:1rem;color:#cfd2c8">A few useful details about starting a project with Atelier Veda.</p></div>
+ <section><div class="wrap faq-list">
+  <details class="rev"><summary>What kinds of projects do you take on?</summary><p>We work on homes, apartments, workplaces and hospitality spaces. The scope is shaped around the site, project needs and agreed brief.</p></details>
+  <details class="rev"><summary>Where do you work?</summary><p>Share your site location and project scope to discuss whether the studio is a good fit.</p></details>
+  <details class="rev"><summary>When should I get in touch?</summary><p>As early as possible, ideally before the layout, budget and consultant team are fixed. Early input can help align the brief and the site constraints.</p></details>
+  <details class="rev"><summary>What happens in the first meeting?</summary><p>A first conversation can cover your goals, site, timing and budget range. A written proposal can then set out the agreed scope and next steps.</p></details>
+  <details class="rev"><summary>Do you manage construction?</summary><p>Site visits and coordination can be included when they are part of the agreed project scope. Construction services and responsibilities should be set out in the signed proposal.</p></details>
+  <details class="rev"><summary>How do I get a fee estimate?</summary><p>A useful first brief includes the site location, approximate size, intended scope and target timeline. The current contact form is a demo and does not transmit messages.</p></details>
+ </div></section></div>
+
+<div class="page" id="p-privacy"><div class="ph"><h1>Privacy policy</h1><p style="max-width:52ch;margin-top:1rem;color:#cfd2c8">How this website handles information and third-party media.</p></div>
+ <section><div class="wrap legal"><p class="policy-note"><b>Demo policy draft.</b> Atelier Veda and its contact details are sample content. The legal operator, privacy contact and any live form provider must be identified before this draft is used for a live service.</p>
+ <p><b>Last updated:</b> 27 October 2026</p>
+ <article><h2>Who operates this site</h2><p>This concept website uses the name “Atelier Veda”. The legal operator has not been identified in the supplied material. Before launch, replace this paragraph with the operator’s registered name, postal address and a working privacy contact.</p></article>
+ <article><h2>Information handled by this demo</h2><p>The contact form currently runs only in your browser. Submitting it shows a demo message, resets the fields and does not send the entered name, email, project type or message to Atelier Veda.</p><p>The site loads fonts, scripts, photographs and video from Google Fonts, cdnjs, Unsplash and Mixkit. Those providers receive technical connection information when a browser requests their files, under their own terms and privacy practices.</p></article>
+ <article><h2>How enquiries would be handled</h2><p>This demo does not use submitted form details because it does not transmit or store them. If a live enquiry service is added, this section must explain its purpose and lawful basis, the data collected, how long it is kept and how to contact the operator.</p></article>
+ <article><h2>Storage, sharing and retention</h2><p>This demo does not store contact form submissions. No form provider or analytics service is connected in this demo. This notice must be updated if that changes.</p></article>
+ <article><h2>Your requests</h2><p>Once a real operator and data process are in place, provide a working contact method for privacy requests and complaints. Requests cannot be actioned through this demo form because it does not transmit submissions.</p></article>
+ <article><h2>Changes and questions</h2><p>Update this page whenever the operator, form, external services or data use changes. No privacy contact channel is configured for this demo. Add the verified operator name and contact method before launch.</p></article>
+ </div></section></div>
+
+<div class="page" id="p-terms"><div class="ph"><h1>Terms of use</h1><p style="max-width:52ch;margin-top:1rem;color:#cfd2c8">Basic terms for browsing this concept website.</p></div>
+ <section><div class="wrap legal"><p class="policy-note"><b>Demo terms.</b> These terms describe this sample website only. The owner’s legal name, governing law, dispute venue and project contract terms must be confirmed before launch.</p><p><b>Last updated:</b> 27 October 2026</p>
+ <article><h2>Using this website</h2><p>You may browse the site for personal, informational use. Do not interfere with the site, attempt unauthorized access, or use its content in a way that breaks applicable law or another person’s rights.</p></article>
+ <article><h2>Information and project examples</h2><p>Project names, descriptions, figures, locations and project narratives on this site are illustrative concept content. Stock photographs and video are illustrative and do not prove that Atelier Veda completed the depicted work.</p><p>Website content is general information. It is not a quote, construction specification, professional appointment or promise of a particular project result.</p></article>
+ <article><h2>Project engagements</h2><p>Any design appointment, fee, deliverable, schedule, site responsibility, intellectual property licence or construction service must be agreed in a separate written proposal or contract. Nothing on this website creates that agreement.</p></article>
+ <article><h2>Third-party media and links</h2><p>The site loads or links to third-party services, including Unsplash, Mixkit, Google Fonts and cdnjs. Those services are operated independently and have their own terms. The site owner should review each licence and provider policy before launch.</p></article>
+ <article><h2>Content and ownership</h2><p>Use only text, images, video, marks and drawings that you own or are licensed to use. Do not copy or redistribute site content without permission from its rights holder.</p></article>
+ <article><h2>Availability and changes</h2><p>This demo is provided as-is and may change while being developed. Questions about a project engagement should be addressed in the written proposal or contract for that project.</p></article>
+ </div></section></div>
+
+<div class="page" id="p-cookies"><div class="ph"><h1>Cookies & media</h1><p style="max-width:52ch;margin-top:1rem;color:#cfd2c8">A clear note about cookies and files loaded from other services.</p></div>
+ <section><div class="wrap legal"><p class="policy-note"><b>Current setup:</b> this page does not intentionally use first-party analytics or advertising cookies. External providers may process connection data or set their own technologies when their media is requested.</p><p><b>Last updated:</b> 27 October 2026</p>
+ <article><h2>What the site loads</h2><p>The page requests typography from Google Fonts, animation scripts from cdnjs, photographs from Unsplash, and video files and posters from Mixkit. Your browser connects to those providers to retrieve the assets. Their own policies control how they handle those requests.</p></article>
+ <article><h2>Cookies and local storage</h2><p>This demo has no analytics or advertising tools and does not intentionally set first-party tracking cookies or use local storage. This must be rechecked if analytics, embedded media, advertising, a booking system or other third-party tools are added.</p></article>
+ <article><h2>Managing cookies</h2><p>You can review or clear cookies in your browser settings. If the live site later uses non-essential cookies or tracking, add an appropriate consent choice before those technologies run and update this page.</p></article>
+ <article><h2>External media</h2><p>Images and video are loaded from remote providers, so those files may not appear when offline or when a provider is unavailable. Before launch, the site owner should review licensing, provider terms and whether local hosting is preferable.</p></article>
+ </div></section></div>
+
+<div class="page" id="p-accessibility"><div class="ph"><h1>Accessibility</h1><p style="max-width:52ch;margin-top:1rem;color:#cfd2c8">We want the studio’s work and information to be usable by as many people as possible.</p></div>
+ <section><div class="wrap legal"><p class="policy-note">This statement describes the current demo. The website has not been independently audited and no conformance level is claimed.</p>
+ <article><h2>Current approach</h2><p>The interface includes keyboard focus styles, a skip link, responsive layouts, text alternatives for project images and support for reduced motion. Some page transitions and scroll effects depend on external animation scripts.</p></article>
+ <article><h2>Known limits</h2><p>Some content uses sample text and stock media. Contrast, keyboard use, screen reader behavior, zoom and motion settings should be reviewed across supported browsers before launch.</p></article>
+ <article><h2>Report an issue</h2><p>The contact form on this demo does not transmit messages. Add a working accessibility contact after the studio’s launch details are confirmed.</p></article>
+ </div></section></div>
+
+<div class="page" id="p-project"></div>
+
+<div class="page" id="p-404"><div class="e404"><div><h1>404</h1><h2 style="margin:1rem 0">This room doesn’t exist.</h2><p style="margin-bottom:2rem;color:#aeb5ad">The page you opened has moved or was never built. Head back to the entrance.</p><a class="btn" href="#home">Back to home</a></div></div></div>
+</main>
+<div id="curtain" aria-hidden="true">Atelier Veda</div>
+
+<footer class="site-footer"><div class="footer-main"><div class="footer-brand"><a class="logo" href="#home">Atelier Veda</a><p>Spaces shaped by light, proportion and material. Architecture and interiors for living, working and gathering.</p><a class="footer-cta" href="#contact">Discuss a project <span aria-hidden="true">↗</span></a></div><div class="footer-col"><h3>Explore</h3><a href="#about">Studio</a><a href="#services">Services</a><a href="#projects">Projects</a><a href="#faq">FAQs</a></div><div class="footer-col"><h3>Get in touch</h3><p>Homes, workspaces and hospitality, shaped around everyday life.</p><a href="#contact">Start an enquiry</a></div><div class="footer-col"><h3>Information</h3><a href="#privacy">Privacy policy</a><a href="#terms">Terms of use</a><a href="#cookies">Cookies & media</a><a href="#accessibility">Accessibility</a></div></div><div class="footer-bottom"><span>© 2026 Atelier Veda. Demo concept.</span><span class="credit">Concept imagery: <a href="https://unsplash.com/license">Unsplash</a> · Interior film: <a href="https://mixkit.co/free-stock-video/">Mixkit</a> · Replace with studio photography before launch</span></div></footer>
+
+
+<script>
+const P=[
+["Sabarmati Courtyard House","Residence · 4,800 sq ft","A timber-screened home around a central courtyard that pulls cool air through every room.","#7d8a7f","#C8963E"],
+["Varaha Penthouse","Apartment interior · 3,200 sq ft","Lime plaster, brass inlay and a sky lounge framed by floor-to-ceiling glass.","#2C3A33","#E8E7E1"],
+["Tapi Riverside Studio","Office · 6,000 sq ft","An open studio with north light, acoustic timber ceilings and a green terrace.","#b9b8ac","#16211C"],
+["Dune Villa","Hospitality · 9,500 sq ft","A low-slung desert retreat in rammed earth with a stepped infinity pool.","#8f7a58","#16211C"],
+["Linen & Stone Flat","Apartment interior · 1,400 sq ft","Compact living with built-in joinery that hides storage behind soft oak panels.","#d8d6cc","#2C3A33"],
+["Hillside Gallery","Cultural · 12,000 sq ft","A concrete gallery that steps down a slope, lit by a single clerestory ribbon.","#16211C","#C8963E"]];
+const IM=["https://images.unsplash.com/photo-1757894651531-c318fe4072b2?auto=format&fit=crop&w=1800&q=85", "https://images.unsplash.com/photo-1776362355123-ca966d36e29c?auto=format&fit=crop&w=1800&q=85", "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=1800&q=85", "https://images.unsplash.com/photo-1707190205814-212295c43de5?auto=format&fit=crop&w=1800&q=85", "https://images.unsplash.com/photo-1781249144372-e76e32526473?auto=format&fit=crop&w=1800&q=85", "https://images.unsplash.com/photo-1774021797107-dd7f9decc26a?auto=format&fit=crop&w=1800&q=85"];
+const PA=["Courtyard interior with brick walls and a glazed roof","Double-height penthouse living room with a city-facing window wall","Open, light-filled design studio with shared work tables","Desert retreat with a quiet reflecting pool","Compact apartment joining its kitchen, hall and living area","Minimal concrete gallery with a skylit exhibition room"];
+const GA=["Brick courtyard below a glass roof","Planted concrete atrium with a winding stone path","Rammed-earth passage beneath a timber pergola","Double-height penthouse lounge with city-facing glazing","Contemporary living room with a raw concrete feature wall","Warm modern living room with soft natural light","Open-plan office workspace","Collaborative office interior","Daylit studio workspace","Desert residence with a reflecting pool","Rammed-earth architecture with a timber pergola","Contemporary villa among the landscape","Compact apartment living room with a reading nook","Small apartment kitchen, hall and living area","Warm residential interior with natural materials","Concrete art gallery with a skylit exhibition room","Minimal architectural courtyard with a reflecting pool","Green courtyard framed by concrete architecture"]
+const art=(i)=>`<img loading="lazy" src="${IM[i%IM.length]}" alt="${PA[i%PA.length]}">`;
+
+const GI=["https://images.unsplash.com/photo-1757894651531-c318fe4072b2?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1783315943625-6c00dc4b265b?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1761367950537-14f834333ecc?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1776362355123-ca966d36e29c?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1758957701419-2c6e266f7988?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1497366216548-37526070297c?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1707190205814-212295c43de5?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1761367950537-14f834333ecc?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1613490493576-7fde63acd811?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1781249144372-e76e32526473?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1600210491892-03d54c0aaf87?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1774021797107-dd7f9decc26a?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1773338359299-65d368f01897?auto=format&fit=crop&w=2000&q=85", "https://images.unsplash.com/photo-1783315943625-6c00dc4b265b?auto=format&fit=crop&w=2000&q=85"];
+const D=[
+{loc:"Ahmedabad, Gujarat",area:"4,800 sq ft",yr:"2024",dur:"14 months",svc:"Architecture, interiors, landscape",story:["The brief was a family home that stays cool without leaning on air conditioning. We wrapped the rooms around a central courtyard, so air and daylight move through every space.","Timber screens filter the afternoon sun, lime plaster keeps walls breathable, and a shallow water channel cools the courtyard in summer."],g:[0,1,2],},
+{loc:"Surat, Gujarat",area:"3,200 sq ft",yr:"2025",dur:"9 months",svc:"Interior design, custom joinery, lighting",story:["A penthouse with a skyline view needed warmth. We layered lime plaster, brass inlay and soft textiles so the glass never feels cold.","Every light is dimmable and zoned, so the lounge changes from a morning reading room to an evening gathering space."],g:[3,4,5],},
+{loc:"Surat, Gujarat",area:"6,000 sq ft",yr:"2023",dur:"11 months",svc:"Workplace design, acoustics, terrace garden",story:["A studio for 40 people that feels more like a home than an office. North light enters through tall glazing, and acoustic timber ceilings keep open-plan work quiet.","A planted terrace gives the team a place to pause, and meeting rooms are glazed so daylight reaches the middle of the floor."],g:[6,7,8],},
+{loc:"Kutch, Gujarat",area:"9,500 sq ft",yr:"2024",dur:"18 months",svc:"Hospitality architecture, landscape, interiors",story:["A desert retreat built from rammed earth dug on site. Thick walls hold the night cool through the day, and low rooflines keep the villa part of the horizon.","A stepped pool reflects the sky, and every guest room opens to its own shaded courtyard."],g:[9,10,11],},
+{loc:"Vadodara, Gujarat",area:"1,400 sq ft",yr:"2025",dur:"5 months",svc:"Space planning, joinery, styling",story:["A compact flat with a long list of needs. Oak panels hide storage, so the living room stays clear and the floor plan feels bigger.","A restrained palette of linen, stone and timber keeps every sightline quiet."],g:[12,13,14],},
+{loc:"Gandhinagar, Gujarat",area:"12,000 sq ft",yr:"2023",dur:"20 months",svc:"Cultural architecture, lighting design",story:["A concrete gallery that steps down a slope, so visitors descend through the art. A single clerestory ribbon lights the main hall without glare.","Curved shelves in the reading room draw the eye up to a round skylight."],g:[15,16,17],}];
+function renderProject(i){const p=P[i],d=D[i],n=(i+1)%P.length;
+ document.getElementById('p-project').innerHTML=`<div class="band project-cover" style="height:88vh;margin-top:0"><img data-px src="${IM[i]}" alt="${PA[i]}"><small class="case-label">Concept case study</small><h1>${p[0]}</h1></div>
+ <section><div class="wrap"><p class="case-disclaimer rev">Illustrative project concept. Location, area, dates, scope and narrative are fictional and shown for design presentation only.</p><dl class="facts rev"><div><dt>Concept location</dt><dd>${d.loc}</dd></div><div><dt>Illustrative area</dt><dd>${d.area}</dd></div><div><dt>Concept year</dt><dd>${d.yr}</dd></div><div><dt>Indicative duration</dt><dd>${d.dur}</dd></div><div><dt>Design scope</dt><dd style="font-size:1rem">${d.svc}</dd></div></dl>
+ <div class="story rev"><h2>The brief</h2><div><p>${p[2]}</p><p style="margin-top:1rem">${d.story[0]}</p><p style="margin-top:1rem">${d.story[1]}</p></div></div>
+ <div class="gal rev">${d.g.map((k,j)=>`<div><img data-px loading="lazy" src="${GI[k]}" alt="${GA[k]}"></div>`).join('')}</div>
+ <div class="rev project-outcome"><small>DESIGN INTENT</small><p class="quote" style="margin:1rem auto">${d.story[1]}</p></div></div></section>
+ <a class="nextp" href="#project-${n}"><small>Next project</small><h2>${P[n][0]}</h2></a>`}
+document.querySelectorAll('.grid').forEach(g=>{const f=g.dataset.feat==='1';P.slice(0,f?3:6).forEach((p,i)=>{g.insertAdjacentHTML('beforeend',`<div class="card rev"><div class="in"><a href="#project-${i}" class="art" data-i="${i}" aria-label="Open ${p[0]}">${art(i)}</a><h3>${p[0]}</h3><small>${p[1]}</small></div></div>`)})});
+document.getElementById('mq').innerHTML=('Architecture<span>◆</span>Interiors<span>◆</span>Landscape<span>◆</span>Lighting<span>◆</span>Furniture<span>◆</span>').repeat(4);
+/* router */
+const pages=['home','about','services','projects','faq','contact','privacy','terms','cookies','accessibility'];let seen;
+function route(){let h=(location.hash||'#home').slice(1);const m=h.match(/^project-(\d)$/);if(m&&P[+m[1]]){renderProject(+m[1]);h='project'}else if(!pages.includes(h))h='404';
+ document.querySelectorAll('.page').forEach(p=>p.classList.toggle('on',p.id==='p-'+h));
+ document.querySelectorAll('#menu a').forEach(a=>{const current=a.getAttribute('href')==='#'+(h==='project'?'projects':h);a.classList.toggle('on',current);if(current)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current')});
+ menu.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.setAttribute('aria-label','Open navigation');scrollTo({top:0,behavior:'auto'});const title={home:'Home',about:'Studio',services:'Services',projects:'Projects',faq:'FAQs',contact:'Contact',privacy:'Privacy Policy',terms:'Terms of Use',cookies:'Cookies & Media',accessibility:'Accessibility',project:'Project'};document.title=(h==='404'?'Page not found':title[h]||'Atelier Veda')+' – Atelier Veda';observe();hero();scr()}
+let busy=0,pendingRoute=null;
+function go(h){if(busy){pendingRoute=h;return}const c=document.getElementById('curtain');
+ const set=()=>{try{history.pushState(null,'',h)}catch(_){location.hash=h}};
+ if(!window.gsap||matchMedia('(prefers-reduced-motion:reduce)').matches){set();route();return}
+ busy=1;gsap.timeline({onComplete:()=>{busy=0;const next=pendingRoute;pendingRoute=null;if(next&&next!==(location.hash||'#home'))go(next)}}).set(c,{transformOrigin:'bottom'}).to(c,{scaleY:1,duration:.45,ease:'power3.inOut'}).add(()=>{set();route()}).set(c,{transformOrigin:'top'}).to(c,{scaleY:0,duration:.55,ease:'power3.inOut',delay:.1})}
+document.addEventListener('click',e=>{const a=e.target.closest('a[href^="#"]');if(!a)return;const h=a.getAttribute('href');if(h==='#main-content'){e.preventDefault();const main=document.getElementById('main-content');main.setAttribute('tabindex','-1');main.focus({preventScroll:true});main.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion:reduce)').matches?'auto':'smooth'});return}e.preventDefault();if(h===(location.hash||'#home'))return;go(h)});
+addEventListener('popstate',route);addEventListener('hashchange',route);
+
+burger.onclick=()=>{const open=menu.classList.toggle('open');burger.setAttribute('aria-expanded',String(open));burger.setAttribute('aria-label',open?'Close navigation':'Open navigation')};
+document.addEventListener('keydown',e=>{if(e.key==='Escape'&&menu.classList.contains('open')){menu.classList.remove('open');burger.setAttribute('aria-expanded','false');burger.setAttribute('aria-label','Open navigation');burger.focus()}});
+/* reveal + counters */
+function observe(){seen&&seen.disconnect();seen=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');en.target.querySelectorAll('[data-n]').forEach(c=>{if(c.dataset.d)return;c.dataset.d=1;const t=+c.dataset.n,s=performance.now();(function f(n){const k=Math.min(1,(n-s)/1600);c.textContent=Math.round(t*(1-Math.pow(1-k,3)));k<1&&requestAnimationFrame(f)})(s)});seen.unobserve(en.target)}}),{threshold:.2});document.querySelectorAll('.page.on .rev').forEach(r=>seen.observe(r))}
+/* GSAP scroll engine */
+function scr(){const n=document.getElementById('nav'),z=document.getElementById('zoom'),y=scrollY,progress=document.getElementById('scroll-progress');if(progress)document.documentElement.style.setProperty('--progress',Math.min(1,y/Math.max(1,document.documentElement.scrollHeight-innerHeight)));const home=document.getElementById('p-home').classList.contains('on'),end=home?z.offsetHeight-innerHeight:0;n.classList.toggle('solid',!home||y>end);n.classList.toggle('dark',home&&y<=end)}
+function hero(){if(!window.gsap||!window.ScrollTrigger||matchMedia('(prefers-reduced-motion:reduce)').matches)return;gsap.registerPlugin(ScrollTrigger);ScrollTrigger.getAll().forEach(t=>t.kill());
+ gsap.set(['#sceneA','#sceneB','#sceneC','#ht','#c1','#c2'],{clearProps:'all'});
+ if(document.getElementById('p-home').classList.contains('on')){
+ gsap.timeline({scrollTrigger:{trigger:'#zoom',start:'top top',end:'bottom bottom',scrub:1.15}})
+ .to('#ht',{opacity:0,y:-42,duration:.38,ease:'none'},0).to('.hint',{opacity:0,y:12,duration:.3,ease:'none'},0)
+ .fromTo('#sceneA',{scale:1.04,xPercent:-1.5,yPercent:1,rotateY:-1},{scale:2.05,xPercent:1.5,yPercent:-1,rotateY:.6,ease:'none',duration:1.6},0)
+ .to('#sceneA',{opacity:0,duration:.52,ease:'none'},.98)
+ .fromTo('#sceneB',{opacity:0,scale:.88,xPercent:2.5,yPercent:1,rotateY:1.5},{opacity:1,scale:1.02,xPercent:-.5,yPercent:-.5,rotateY:0,ease:'none',duration:.68},.92)
+ .to('#sceneB',{scale:1.32,xPercent:-1.8,yPercent:-1.5,rotateY:-.5,ease:'none',duration:1.02},1.6)
+ .to('#sceneB',{opacity:0,duration:.48,ease:'none'},2.1)
+ .fromTo('#sceneC',{opacity:0,scale:.9,xPercent:-1.8,yPercent:1.2,rotateY:-1.4},{opacity:1,scale:1.04,xPercent:.3,yPercent:-.6,rotateY:0,ease:'none',duration:.72},2.02)
+ .to('#sceneC',{scale:1.14,xPercent:1.2,yPercent:-1.6,rotateY:.35,ease:'none',duration:1.15},2.74)
+ .fromTo('#c1',{opacity:0,y:14},{opacity:1,y:0,duration:.28,ease:'power1.out'},.48).to('#c1',{opacity:0,y:-10,duration:.28,ease:'power1.in'},1.18)
+ .fromTo('#c2',{opacity:0,y:18},{opacity:1,y:0,duration:.42,ease:'power1.out'},2.55).to('#c2',{opacity:1,duration:.7,ease:'none'},2.97)}
+ document.querySelectorAll('.page.on [data-px]').forEach(el=>gsap.fromTo(el,{yPercent:-8},{yPercent:8,ease:'none',scrollTrigger:{trigger:el.parentNode,start:'top bottom',end:'bottom top',scrub:true}}));
+ document.querySelectorAll('.page.on .band').forEach(el=>gsap.fromTo(el,{clipPath:'inset(14% 12% 14% 12%)'},{clipPath:'inset(0% 0% 0% 0%)',ease:'none',scrollTrigger:{trigger:el,start:'top 90%',end:'top 20%',scrub:true}}));
+ const featured=document.querySelector('#p-home .grid[data-feat="1"]');
+ if(featured){
+  const cards=gsap.utils.toArray(featured.querySelectorAll('.card'));
+  const small=matchMedia('(max-width:800px)').matches;
+  gsap.set(cards,{clearProps:'transform,opacity'});
+  const work=gsap.timeline({scrollTrigger:{trigger:featured,start:'top 88%',end:'bottom 42%',scrub:.82,invalidateOnRefresh:true}});
+  work.fromTo(cards,{xPercent:i=>i%2? (small?14:23): (small?-14:-23),y:small?38:64,z:small?-80:-190,rotateY:i=>i%2? (small?-10:-17): (small?10:17),rotateX:small?5:9,scale:.88,opacity:0},{xPercent:0,y:0,z:0,rotateY:0,rotateX:0,scale:1,opacity:1,ease:'power2.out',stagger:.26,duration:1.1},0);
+  work.fromTo(cards.map(card=>card.querySelector('.art img')),{scale:1.16,yPercent:4},{scale:1,yPercent:0,ease:'power1.out',stagger:.26,duration:1.1},0);
+ }
+ document.querySelectorAll('.page.on .ph h1').forEach(el=>gsap.from(el,{y:60,opacity:0,duration:1.1,ease:'power3.out'}));
+ ScrollTrigger.refresh()}
+addEventListener('load',()=>{hero();scr()});
+addEventListener('scroll',()=>requestAnimationFrame(scr),{passive:true});addEventListener('resize',scr);document.querySelectorAll('img').forEach(i=>i.addEventListener('error',()=>i.style.opacity=0));
+/* 3D tilt on cards */
+document.addEventListener('mousemove',e=>{const c=e.target.closest&&e.target.closest('.card .in');document.querySelectorAll('.card .in').forEach(i=>{if(i!==c)i.style.transform=''});if(c){const r=c.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;c.style.transform=`rotateY(${x*8}deg) rotateX(${-y*8}deg)`}});
+document.getElementById('f').onsubmit=e=>{e.preventDefault();document.getElementById('ok').style.display='block';e.currentTarget.reset()};
+const io=new IntersectionObserver(es=>es.forEach(e=>e.isIntersecting?e.target.play().catch(()=>{}):e.target.pause()),{threshold:.2});
+document.querySelectorAll('video').forEach(v=>{io.observe(v);v.addEventListener('error',()=>v.style.display='none',true)});
+document.addEventListener('error',e=>{if(e.target.tagName==='IMG')e.target.style.opacity=0},true);
+route();
+</script></body></html>
